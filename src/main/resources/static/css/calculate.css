@@ -1,0 +1,37 @@
+body {
+    height: 850px;
+}
+
+.calculate-form {
+    margin: 100px auto;
+    width: 400px;
+}
+
+.point {
+    margin-bottom: 25px;
+    text-align: left;
+    padding-left: 80px;
+}
+
+p {
+    font-size: 12px;
+    text-align: center;
+    margin-left: 120px;
+}
+
+input[type="number"] {
+    width: 80px;
+}
+
+.holding-point,
+#number {
+    margin-left: 70px;
+}
+
+button {
+    width: 270px;
+    height: 45px;
+    margin-top: 50px;
+    border-radius: 20px;
+    border: none;
+}

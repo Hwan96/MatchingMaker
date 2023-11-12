@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/modernizr.custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.sockjs.org/sockjs-client/1.5.1/sockjs.min.js"></script>
+
+    <script th:inline="javascript">
+        // SockJS와 STOMP 클라이언트 초기화
+        const socket = new SockJS('/ws');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function(frame) {
+
+            let userId = /*[# th:utext="${session.loginId}"]*/'default'/*[/]*/;
+            stompClient.subscribe('/topic/notifications/' + userId, function(notification) {
+                let data = JSON.parse(notification.body);
+                // 알림 UI를 업데이트하는 코드 추가
+                alert(data.title + ': ' + data.content); // 알림을 alert로 표시
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var socket = new SockJS('/ws');
+        var stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/notifications/' + answererId, function (notification) {
+                alert(notification.body);
+            });
+        });
+    </script>
+</head>
+
+<body>
+<header>
+    <div class="logo-and-menu">
+        <div class="logo">
+            <img class="home-img" src="/images/img_logo.png" onclick="location.href='/main'">
+        </div>
+        <div class="header-menu">
+            <nav>
+						<span>
+							I<a th:href="@{/myPage_checkPassword}">마이페이지</a>I
+                            <a th:href="@{/list}">회원목록</a>I
+                            <a th:href="@{/logout}">로그아웃</a>I
+						</span>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="home-wrapper wrapper">
+    <div class="home">
+        <div class="home-text">
+            <div class="line-1"><span class="color-1">지금</span>&ensp;질문하세요<span class="dot">.</span></div>
+            <div class="line-2">당신<span class="spacing">만을</span>&ensp;위한&ensp;전문가가&ensp;<span class="color-1">지금</span>&ensp;알려드립니다<span class="dot">.</span></div>
+            <div class="line-3"><span class="color-2">A</span>sk&ensp;<span class="color-2">N</span>ow<span class="rest">,</span></div>
+            <div class="line-4"><span class="color-2">A</span>nswer&ensp;<span class="color-2">N</span>ow<span class="dot">.</span></div>
+        </div>
+        <div class="home-buttons">
+            <!--버튼 클릭 시 로그인 되어있으면 해당 페이지로, 안되어있으면 로그인 페이지로 이동-->
+            <button class="btn-1" onclick="location.href='/questionRegister'"><span>질문 등록</span></button>
+            <button class="btn-2" onclick="location.href='/answererRegister'"><span>답변자 신청</span></button>
+            <button class="btn-3" onclick="location.href='/payAndCalculate'"><span>포인트 충전 / 정산</span></button>
+        </div>
+        <div class="home-icon">
+            <img class="qa-icon" src="/images/img_qa.png">
+        </div>
+    </div>
+</div><!-- /container -->
+</body>
+</html>

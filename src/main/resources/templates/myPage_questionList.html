@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/myPage_component.css" />
+    <link rel="stylesheet" type="text/css" href="/css/myPage_questionList.css" />
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/modernizr.custom.js"></script>
+
+</head>
+<body>
+<header>
+    <div class="logo-and-menu">
+        <div class="logo">
+            <img class="home-img" src="/images/img_logo.png" onclick="location.href='/main'">
+        </div>
+        <div class="header-menu">
+            <nav>
+                    <span>
+							I<a th:href="@{/logout}">로그아웃</a>I
+							<a th:href="@{/myPage_checkPassword}">마이페이지</a>I
+						</span>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="question-list-wrapper wrapper">
+    <!-- 왼쪽 메뉴바 -->
+    <div class="side-menu">
+        <ul>
+            <li><a th:href="@{/questionRegister}"><span class="material-icons">border_color</span>질문 등록</a></li>
+            <li><a th:href="@{/answererRegister}"><span class="material-icons">person_add</span>답변자 등록</a></li>
+            <li><a th:href="@{/payAndCalculate}"><span class="material-icons">toll</span>포인트 충전 / 정산</a></li>
+        </ul>
+    </div>
+
+
+    <div class="my-page-menu">
+        <ul>
+            <li><a th:href="@{/myPage_info}">내 정보</a></li>
+            <li><a th:href="@{/myPage_changePassword}">정보수정</a></li>
+            <li><a th:href="@{/myPage_questionList}">내 질문 기록</a></li>
+            <li><a th:href="@{/myPage_accountRegister}">계좌 등록</a></li>
+            <li><a th:href="@{/myPage_answerList}">내 답변 기록</a></li>
+        </ul>
+    </div>
+
+    <div class="question-list main-contents">
+        <div class="page-name">
+            <div class="page-name-box">
+                <h2>내 질문 내역</h2>
+            </div>
+        </div>
+
+        <div class="main">
+            <table>
+                <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>분야</th>
+                    <th>원하는 답변시간</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="question : ${question}">
+                    <td th:text="${question.title}"></td>
+                    <td th:text="${question.content}"></td>
+                    <td th:text="${question.field}"></td>
+                    <td th:text="${#temporals.format(question.expectedAnswerTime, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+body {
+    height: 850px;
+}
+
+.answerer-register-form {
+    width: 550px;
+    margin: 0 auto;
+}
+
+.field {
+    margin: 120px auto 0;
+}
+
+.tag, .file {
+    margin: 40px auto;
+}
+
+.field select {
+    width: 150px;
+    height: 25px;
+}
+
+#tag {
+    height: 25px;
+    margin-left: 30px;
+}
+
+.tag input[type="text"] {
+    width: 150px;
+    font-size: 10px;
+    border-radius: 10px;
+    text-indent: 9px;
+}
+
+#file {
+    margin-left: 100px;
+}
+
+
+button {
+    display: block;
+    width: 300px;
+    height: 40px;
+    margin: 80px auto;
+}
+
+.list {
+    float: left;
+    padding-left: 100px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/myPage_component.css" />
+    <link rel="stylesheet" type="text/css" href="/css/myPage_accountRegister.css" />
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/modernizr.custom.js"></script>
+</head>
+<body>
+<header>
+    <div class="logo-and-menu">
+        <div class="logo">
+            <img class="home-img" src="/images/img_logo.png" onclick="location.href='/main'">
+        </div>
+        <div class="header-menu">
+            <nav>
+                    <span>
+							I<a th:href="@{/myPage_checkPassword}">마이페이지</a>I
+                            <a th:href="@{/logout}">로그아웃</a>I
+                    </span>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<h3>계좌 등록</h3>
+<div class="account-register-wrapper wrapper">
+    <!-- 왼쪽 메뉴바 -->
+    <div class="side-menu">
+        <ul>
+            <li><a th:href="@{/questionRegister}"><span class="material-icons">border_color</span>질문 등록</a></li>
+            <li><a th:href="@{/answererRegister}"><span class="material-icons">person_add</span>답변자 등록</a></li>
+            <li><a th:href="@{/payAndCalculate}"><span class="material-icons">toll</span>포인트 충전 / 정산</a></li>
+        </ul>
+    </div>
+
+    <div class="my-page-menu">
+        <ul>
+            <li><a th:href="@{/myPage_info}">내 정보</a></li>
+            <li><a th:href="@{/myPage_changePassword}">정보수정</a></li>
+            <li><a th:href="@{/myPage_questionList}">내 질문 기록</a></li>
+            <li><a th:href="@{/myPage_accountRegister}">계좌 등록</a></li>
+            <li><a th:href="@{/myPage_answerList}">내 답변 기록</a></li>
+        </ul>
+    </div>
+
+    <div class="account-register main-contents">
+        <div class="page-name">
+            <div class="page-name-box">
+                <h2>계좌 등록</h2>
+            </div>
+        </div>
+
+        <div class="main">
+            <form th:action="@{/myPage_accountRegister}" method="post">
+                <input type="hidden" th:value="${updateMember.id}" name="id">
+                <input type="hidden" th:value="${updateMember.memberEmail}" name="memberEmail">
+                <input type="hidden" th:value="${updateMember.memberPassword}" name="memberPassword">
+                <input type="hidden" th:value="${updateMember.memberName}" name="memberName">
+                <input type="hidden" th:value="${updateMember.birthDate}" name="birthDate">
+                <input type="hidden" th:value="${updateMember.nickName}" name="nickName">
+                <input type="hidden" th:value="${updateMember.gender}" name="gender">
+                <input type="hidden" th:value="${updateMember.phoneNumber}" name="phoneNumber">
+
+                <select class="bank" th:field="${updateMember.bankName}" name="bankName">
+                    <option value="" selected disabled hidden>은행 선택</option>
+                    <option value="KB">KB국민</option>
+                    <option value="신한">신한</option>
+                    <option value="하나">하나</option>
+                    <option value="농협">농협</option>
+                    <option value="IBK">IBK기업</option>
+                </select><br><br><br>
+
+                <input type="text" name="accountNumber" th:value="${updateMember.accountNumber}" placeholder="계좌번호 입력"><br><br><br>
+
+                <input type="text" name="accountHolder" th:value="${updateMember.accountHolder}" placeholder="예금주 입력">
+                <div>
+                    <input type="submit" class="btn" value="확인">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

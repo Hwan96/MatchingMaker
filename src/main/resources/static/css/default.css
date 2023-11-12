@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 135px;
+    z-index: 99;
+    background-color: #f0f0f0;
+}
+
+.empty {
+    flex: 1;
+}
+
+body {
+    position: relative;
+    padding-top: 135px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: black;
+}
+
+.home-img {
+    width: 200px;
+    height: 135px;
+    cursor: pointer;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: black;
+    margin-top: 20px;
+}
+
+.main-contents {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 220px);
+    margin-left: 220px;
+}
+
+.page-name {
+    position: relative;
+    width: 550px;
+    height: 100px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.page-name-box {
+    position: absolute;
+    top: 0;
+    width: 550px;
+    height: 100px;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.main {
+    flex: 1;
+    width: 99%;
+    height: 800px;
+    border-radius: 20px;
+    margin: 40px auto;
+    background-color: lavender;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 30px;
+    color: midnightblue;
+    text-align: center;
+}
+
+.logo-and-menu {
+    position: fixed;
+    top: 0;
+    left: -20px;
+    display: flex;
+    width: 100%;
+    height: 135px;
+}
+
+.logo {
+    width: 200px;
+    height: 135px;
+}
+
+.header-menu {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-menu nav a {
+    font-size: 13px;
+    color: #404040;
+    margin: 20px;
+}
+
+.header-menu nav a:hover {
+    color: #808080;
+}
+
+a {
+	color: #888;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: #333;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    border-radius: 10px;
+    text-indent: 9px;
+}
+
+button,
+input[type="submit"] {
+    background-color: #d0d0d0;
+    border: none;
+    color: black;
+    border-radius: 20px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #d7d7d7;
+}

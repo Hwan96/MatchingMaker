@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/answererRegister.css" />
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--		<script src="js/modernizr.custom.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+    <script th:inline="javascript">
+        // SockJS와 STOMP 클라이언트 초기화
+        const socket = new SockJS('/ws');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function(frame) {
+
+            let userId = /*[# th:utext="${session.loginId}"]*/'default'/*[/]*/;
+            stompClient.subscribe('/topic/notifications/' + userId, function(notification) {
+                let data = JSON.parse(notification.body);
+                // 알림 UI를 업데이트하는 코드 추가
+                alert(data.title + ': ' + data.content); // 알림을 alert로 표시
+            });
+        });
+    </script>
+</head>
+<body>
+<header>
+    <div class="logo-and-menu">
+        <div class="logo">
+            <img class="home-img" src="/images/img_logo.png" onclick="location.href='/main'">
+        </div>
+        <div class="header-menu">
+            <nav>
+						<span>
+							I<a th:href="@{/logout}">로그아웃</a>I
+							<a th:href="@{/myPage_checkPassword}">마이페이지</a>I
+						</span>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="answerer-register-wrapper wrapper">
+    <!-- 왼쪽 메뉴바 -->
+    <div class="side-menu">
+        <ul>
+            <li><a th:href="@{/questionRegister}"><span class="material-icons">border_color</span>질문 등록</a></li>
+            <li><a th:href="@{/answererRegister}"><span class="material-icons">person_add</span>답변자 등록</a></li>
+            <li><a th:href="@{/payAndCalculate}"><span class="material-icons">toll</span>포인트 충전 / 정산</a></li>
+        </ul>
+    </div>
+
+    <div class="answerer-register main-contents">
+        <form th:action="@{/answererRegister}" method="post" enctype="multipart/form-data">
+            <div class="page-name">
+                <div class="page-name-box">
+                    <h2>답변자 신청</h2>
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="answerer-register-form">
+                    <div class="field">
+                        <span class="list">전문 분야</span>
+                        <label for="field">
+                            <select id="field" name="field">
+                                <option value="" selected disabled hidden>분야 선택</option>
+                                <option value="language">언어</option>
+                                <option value="math">수학</option>
+                                <option value="english">영어</option>
+                                <option value="music">음악</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="tag">
+                        <label for="tag" class="list">태그</label>
+                        <input type="text" id="tag" name="tag" placeholder="#태그1, #태그2, ..." required>
+                    </div>
+
+                    <div class="file">
+                        <span class="list">증명 파일</span>
+                        <input type="file" id="file" name="proofFile" accept="image/*" required>
+                    </div>
+
+                    <button class="answerer-register-btn">신 청 하 기</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

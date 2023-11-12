@@ -1,0 +1,77 @@
+.question-register-form {
+    width: 550px;
+    margin: 0 auto;
+}
+
+.question-title {
+    margin: 60px auto;
+}
+
+.question-title input[type="text"] {
+    height: 35px;
+}
+
+input[type="text"],
+textarea {
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 14px;
+    width: 550px;
+    border: 1px solid black;
+    border-radius: 3px;
+    text-indent: 3px;
+}
+
+textarea {
+    height: 400px;
+    resize: none;
+    margin-bottom: 30px;
+}
+
+.file, .field, .tag, .time {
+    margin: 40px auto;
+}
+
+#file {
+    margin-left: 40px;
+}
+
+.field select {
+    width: 150px;
+    height: 25px;
+    margin-right: 30px;
+}
+
+.tag input[type="text"] {
+    width: 150px;
+    font-size: 10px;
+    border-radius: 10px;
+    text-indent: 9px;
+    margin-right: 30px;
+}
+
+#tag {
+    height: 25px;
+}
+
+#point {
+    width: 70px;
+    margin-left: -40px;
+}
+
+.explanation {
+    margin-left: 20px;
+    font-size: 10px;
+}
+
+.question-register-btn {
+    display: block;
+    width: 300px;
+    height: 40px;
+    margin: 80px auto;
+}
+
+.list {
+    float: left;
+    padding-left: 100px;
+}
+

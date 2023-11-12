@@ -1,0 +1,42 @@
+html, body {
+    height: 725px;
+}
+
+.pay-form {
+    margin: 80px auto;
+    width: 400px;
+}
+
+.holding-point, .unit {
+    margin-bottom: 30px;
+}
+
+input[type="radio"] {
+    margin-bottom: 20px;
+}
+
+.unit {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.point {
+    margin-bottom: 25px;
+    text-align: left;
+    padding-left: 80px;
+}
+
+.point-text {
+    margin-left: 30px;
+}
+
+button {
+    width: 300px;
+    height: 45px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 50px;
+}
+

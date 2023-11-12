@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+<header>
+    <div class="logo-and-menu">
+        <div class="logo">
+            <img class="home-img" src="/images/img_logo.png" onclick="location.href='/'">
+        </div>
+        <div class="header-menu">
+            <nav>
+                    <span>
+                        I<a th:href="@{/signUp}">회원가입</a>I
+                        <a th:href="@{/login}">로그인</a>I
+                    </span>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<div class="login-wrapper wrapper">
+    <div class="side-menu">
+        <ul>
+            <li><a th:href="@{/login}"><span class="material-icons">border_color</span>질문 등록</a></li>
+            <li><a th:href="@{/login}"><span class="material-icons">person_add</span>답변자 등록</a></li>
+            <li><a th:href="@{/login}"><span class="material-icons">toll</span>포인트 충전 / 정산</a></li>
+        </ul>
+    </div>
+
+    <div class="login main-contents">
+        <div class="page-name">
+            <div class="page-name-box">
+                <h2>로그인</h2>
+            </div>
+        </div>
+
+        <div class="main">
+            <div>
+                <form action="/login" class="login-form" method="post">
+                    <input type="text" class="in" autocomplete="off" placeholder="아이디" name="memberEmail">
+                    <input type="password" class="in" autocomplete="off" placeholder="비밀번호" name="memberPassword">
+                    <input type="submit" class="btn" value="로그인">
+                </form>
+            </div>
+
+            <div class="forgot-pw">
+                <a href="@{/forgot_changePassword}">비밀번호를 잊어버리셨나요?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chat-wrapper">
+    <div class="chat-icon">
+
+    </div>
+</div>
+</body>
+</html>

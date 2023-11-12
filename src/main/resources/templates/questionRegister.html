@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesiton Register</title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/questionRegister.css" />
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <!--		<script src="js/modernizr.custom.js"></script>-->
+    <script th:inline="javascript">
+        // SockJS와 STOMP 클라이언트 초기화
+        const socket = new SockJS('/ws');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function(frame) {
+
+            let userId = /*[# th:utext="${session.loginId}"]*/'default'/*[/]*/;
+            stompClient.subscribe('/topic/notifications/' + userId, function(notification) {
+                let data = JSON.parse(notification.body);
+                // 알림 UI를 업데이트하는 코드 추가
+                alert(data.title + ': ' + data.content); // 알림을 alert로 표시
+            });
+        });
+    </script>
+
+    <script>
+            function toggleTimeInput() {
+                var timeType = document.querySelector('input[name="answerTimeType"]:checked').value;
+                var specificAnswerTimeInput = document.getElementById("specificAnswerTimeInput");
+                if (timeType === "specificTime") {
+                  specificAnswerTimeInput.style.display = "block";
+                } else {
+                    specificAnswerTimeInput.style.display = "none";
+                }
+            }
+    </script>
+
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', function() {
+        const pointError = /*[[${pointError}]]*/ null;
+        if(pointError) {
+            alert("보유 포인트보다 " + (pointError === 'register' ? "등록 포인트가 많습니다. 포인트 충전이 필요합니다." : "정산 포인트가 많습니다."));
+        }
+    });
+    /*]]>*/
+</script>
+</head>
+<body>
+<header>
+    <div class="logo-and-menu">
+        <div class="logo">
+            <img class="home-img" src="/images/img_logo.png" onclick="location.href='/main'">
+        </div>
+        <div class="empty"></div>
+        <div class="header-menu">
+            <nav>
+						<span>
+							I<a th:href="@{/logout}">로그아웃</a>I
+							<a th:href="@{/myPage_checkPassword}">마이페이지</a>I
+						</span>
+
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="question-register-wrapper wrapper">
+    <!-- 왼쪽 메뉴바 -->
+    <div class="side-menu">
+        <ul>
+            <li><a th:href="@{/questionRegister}"><span class="material-icons">border_color</span>질문 등록</a></li>
+            <li><a th:href="@{/answererRegister}"><span class="material-icons">person_add</span>답변자 등록</a></li>
+            <li><a th:href="@{/payAndCalculate}"><span class="material-icons">toll</span>포인트 충전 / 정산</a></li>
+        </ul>
+    </div>
+
+    <div class="question-register main-contents">
+        <div class="page-name">
+            <div class="page-name-box">
+                <h2>질문 등록</h2>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="question-register-form">
+                <form th:action="@{/questionRegister}" method="post" enctype="multipart/form-data">
+                    <div class="question-title">
+							<span>
+								<p>질문 제목</p>
+								<input type="text" class="title" id="title" name="title" placeholder="제목을 입력하세요">
+							</span>
+                    </div>
+
+                    <div class="question-content">
+								<span>
+									<p>질문 내용</p>
+									<textarea class="content" rows="10" id="content" name="content"  placeholder="내용을 입력하세요"></textarea>
+								</span>
+                    </div>
+
+                    <div class="file">
+                        <span class="list">파일 첨부</span>
+                        <input type="file" id="file" name="file">
+                    </div>
+
+                    <div class="field">
+                        <span class="list">분야</span>
+                        <label for="field">
+                            <select id="field" name="field">
+                                <option value="" selected disabled hidden>분야 선택</option>
+                                <option value="language">언어</option>
+                                <option value="math">수학</option>
+                                <option value="english">영어</option>
+                                <option value="music">음악</option>
+                                <!--  분야 추가 부분 -->
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="tags">
+                        <label for="tags" class="list">태그</label>
+                        <input type="text" id="tags" name="tags" class="tag" placeholder="#태그1, #태그2, ...">
+                    </div>
+
+                    <!--
+                       <div class="time">
+                           <label for="answerTimeType">답변 희망 시간</label><br>
+                           <input type="radio" id="realTime" name="answerTimeType" value="realTime" onclick="toggleTimeInput()">
+                           <label for="realTime">실시간</label><br>
+                           <input type="radio" id="specificTime" name="answerTimeType" value="specificTime" onclick="toggleTimeInput()">
+                           <label for="specificTime">시간 선택:</label><br>
+                           <input type="time" id="specificAnswerTimeInput" name="specificAnswerTime" style="display: none;"><br>
+                       </div>
+                       -->
+
+                    <div class="point">
+                        <span class="list">등록할 포인트</span>
+                        <span><input type="number" id="point" name="registrationPoints" min="10" step="10"></span>
+                        <span class="explanation">10포인트 단위로 등록 가능</span>
+                    </div>
+
+                    <input type="submit" value="등록하기" class="question-register-btn">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/pay.css" />
+    <link rel="stylesheet" type="text/css" href="/css/side_menu.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/modernizr.custom.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-and-menu">
+            <div class="logo">
+                <img class="home-img" src="/images/img_logo.png" onclick="location.href='/main'">
+            </div>
+            <div class="header-menu">
+                <nav>
+                    <span>
+							I<a th:href="@{/logout}">로그아웃</a>I
+							<a th:href="@{/myPage_checkPassword}">마이페이지</a>I
+                    </span>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="pay-wrapper wrapper">
+        <!-- 왼쪽 메뉴바 -->
+        <div class="side-menu">
+            <ul>
+                <li><a th:href="@{/questionRegister}"><span class="material-icons">border_color</span>질문 등록</a></li>
+                <li><a th:href="@{/answererRegister}"><span class="material-icons">person_add</span>답변자 등록</a></li>
+                <li><a th:href="@{/payAndCalculate}"><span class="material-icons">toll</span>포인트 충전 / 정산</a></li>
+            </ul>
+        </div>
+
+        <div class="pay main-contents">
+            <div class="page-name">
+                <div class="page-name-box">
+                    <h2>포인트 충전</h2>
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="pay-form">
+                    <div class="holding-point">
+                        <!--포인트 수정 필요-->
+                        <div class="point">
+                            <span class="text">보유 포인트 :&emsp;&emsp;&emsp;</span>
+                            <span th:text="${points} + ' p'"></span>
+                        </div>
+                    </div>
+
+                    <form action="/pay" method="post">
+                    <div class="point">충전할 포인트</div>
+                    <div class="unit">
+                        <div>
+                            <input type="radio" id="1000" name="points" value="1000"><label for="1000">1000</label>
+                            <span class="point-text">포인트</span>
+                        </div>
+                        <div>
+                            <input type="radio" id="3000" name="points" value="3000"><label for="3000">3000</label>
+                            <span class="point-text">포인트</span>
+                        </div>
+                        <div>
+                            <input type="radio" id="5000" name="points" value="5000"><label for="5000">5000</label>
+                            <span class="point-text">포인트</span>
+                        </div>
+                        <div>
+                            <input type="radio" id="10000" name="points" value="10000"><label for="10000">10000</label>
+                            <span class="point-text">포인트</span>
+                        </div>
+                        <div>
+                            <input type="radio" id="30000" name="points" value="30000"><label for="30000">30000</label>
+                            <span class="point-text">포인트</span>
+                        </div>
+                    </div>
+                        <button type="submit">충 전 하 기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

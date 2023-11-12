@@ -1,0 +1,14 @@
+.my-info-wrapper {
+    display: flex;
+
+}
+
+.my-info {
+    color: black;
+    padding-left: 250px;
+}
+
+.id {
+    margin-top: 30px;
+}
+
